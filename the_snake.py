@@ -216,8 +216,9 @@ def main():
         # Проверка на съедание яблока
         if snake.get_head_position() == apple.position:
             snake.length += 1
+            ap = [poison_apple.position]
             apple.position = apple.randomize_position(
-                snake.positions + [poison_apple.position] + [st.position for st in stones]
+                snake.positions + ap + [st.position for st in stones]
             )
 
         # Проверка на съедание яда
@@ -226,8 +227,9 @@ def main():
                 snake.length -= 1
             else:
                 snake.reset()
+            ap = [apple.position]
             poison_apple.position = poison_apple.randomize_position(
-                snake.positions + [apple.position] + [stone.position for stone in stones]
+                snake.positions + ap + [stone.position for stone in stones]
             )
 
         # Проверка на столкновение с камнем
@@ -235,8 +237,9 @@ def main():
             if snake.get_head_position() == stone.position:
                 snake.reset()
                 for st in stones:
+                    ap = [apple.position]
                     st.position = st.randomize_position(
-                        snake.positions + [apple.position] + [poison_apple.position]
+                        snake.positions + ap + [poison_apple.position]
                     )
                 break
 
