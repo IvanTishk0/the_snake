@@ -24,8 +24,8 @@ clock = pygame.time.Clock()
 
 
 def handle_keys(game_object):
-    """Обрабатывает нажатия клавиш пользователем
-    и изменяет направление змейки."""
+    """Обрабатывает нажатия клавиш пользователем"""
+    """и изменяет направление змейки."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -67,8 +67,8 @@ class PoisonApple(GameObject):
         )
 
     def randomize_position(self, snake_positions):
-        """Случайным образом выбирает позицию для яблока,
-        избегая занятых позиций."""
+        """Случайным образом выбирает позицию для яблока,"""
+        """избегая занятых позиций."""
         while True:
             x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
             y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
@@ -95,8 +95,8 @@ class Apple(GameObject):
         )
 
     def randomize_position(self, snake_positions):
-        """Случайным образом выбирает позицию для яблока,
-         избегая занятых позиций."""
+        """Случайным образом выбирает позицию для яблока,"""
+        """избегая занятых позиций."""
         while True:
             x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
             y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
@@ -123,8 +123,8 @@ class Stone(GameObject):
         )
 
     def randomize_position(self, snake_positions):
-        """Случайным образом выбирает позицию для камня,
-        избегая занятых позиций."""
+        """Случайным образом выбирает позицию для камня,"""
+        """избегая занятых позиций."""
         while True:
             x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
             y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
@@ -145,7 +145,9 @@ class Snake(GameObject):
     def __init__(self):
         """Инициализация змейки."""
         super().__init__()
-        self.positions = [(GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)]
+        self.positions = [
+            (GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)
+        ]
         self.body_color = SNAKE_COLOR
         self.length = 1
         self.direction = RIGHT
@@ -215,7 +217,10 @@ def main():
         if snake.get_head_position() == apple.position:
             snake.length += 1
             apple.position = apple.randomize_position(
-                snake.positions + [poison_apple.position] + [stone.position for stone in stones])
+                snake.positions + \
+                [poison_apple.position] + \
+                [stone.position for stone in stones]
+            )
 
         # Проверка на съедание яда
         if snake.get_head_position() == poison_apple.position:
@@ -224,7 +229,10 @@ def main():
             else:
                 snake.reset()
             poison_apple.position = poison_apple.randomize_position(
-                snake.positions + [apple.position] + [stone.position for stone in stones])
+                snake.positions + \
+                [apple.position] + \
+                [stone.position for stone in stones]
+            )
 
         # Проверка на столкновение с камнем
         for stone in stones:
@@ -232,7 +240,9 @@ def main():
                 snake.reset()
                 for st in stones:
                     st.position = st.randomize_position(
-                        snake.positions + [apple.position] + [poison_apple.position]
+                        snake.positions + \
+                        [apple.position] + \
+                        [poison_apple.position]
                     )
                 break
 
