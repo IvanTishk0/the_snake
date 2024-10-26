@@ -24,7 +24,8 @@ clock = pygame.time.Clock()
 
 
 def handle_keys(game_object):
-    """Обрабатывает нажатия клавиш пользователем и изменяет направление змейки."""
+    """Обрабатывает нажатия клавиш пользователем
+    и изменяет направление змейки."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -45,7 +46,8 @@ class GameObject:
 
     def __init__(self):
         """Инициализация объекта."""
-        self.position = (GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)
+        self.position = (GRID_WIDTH // 2 * GRID_SIZE,
+                         GRID_HEIGHT // 2 * GRID_SIZE)
         self.body_color = None
 
     def draw(self):
@@ -60,10 +62,13 @@ class PoisonApple(GameObject):
         """Инициализация отравленного яблока."""
         super().__init__()
         self.body_color = (0, 0, 255)
-        self.position = self.randomize_position([(GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)])
+        self.position = self.randomize_position(
+            [(GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)]
+        )
 
     def randomize_position(self, snake_positions):
-        """Случайным образом выбирает позицию для яблока, избегая занятых позиций."""
+        """Случайным образом выбирает позицию для яблока,
+        избегая занятых позиций."""
         while True:
             x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
             y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
@@ -85,10 +90,13 @@ class Apple(GameObject):
         """Инициализация обычного яблока."""
         super().__init__()
         self.body_color = APPLE_COLOR
-        self.position = self.randomize_position([(GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)])
+        self.position = self.randomize_position(
+            [(GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)]
+        )
 
     def randomize_position(self, snake_positions):
-        """Случайным образом выбирает позицию для яблока, избегая занятых позиций."""
+        """Случайным образом выбирает позицию для яблока,
+         избегая занятых позиций."""
         while True:
             x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
             y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
@@ -110,10 +118,13 @@ class Stone(GameObject):
         """Инициализация камня."""
         super().__init__()
         self.body_color = (255, 255, 255)
-        self.position = self.randomize_position([(GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)])
+        self.position = self.randomize_position(
+            [(GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)]
+        )
 
     def randomize_position(self, snake_positions):
-        """Случайным образом выбирает позицию для камня, избегая занятых позиций."""
+        """Случайным образом выбирает позицию для камня,
+        избегая занятых позиций."""
         while True:
             x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
             y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
